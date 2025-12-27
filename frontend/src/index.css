@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background-color: #f7f9fc;
+  color: #1a1f36;
+  line-height: 1.6;
+}
+
+.container {
+  width: 92%;
+  max-width: 460px;
+  margin: 70px auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  text-align: center;
+  color: #0f172a;
+}
+
+.file-input {
+  width: 100%;
+  padding: 12px;
+  border: 1.8px dashed #cbd5e1;
+  border-radius: 10px;
+  background-color: #f8fafc;
+  font-size: 0.95rem;
+  transition: 0.2s ease;
+}
+
+.file-input:hover {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background: #1e293b;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-top: 16px;
+  transition: 0.25s ease;
+  letter-spacing: 0.3px;
+}
+
+button:hover {
+  background: #0f172a;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(30, 41, 59, 0.25);
+}
+
+.result-box {
+  margin-top: 26px;
+  padding: 18px;
+  background-color: #f1f5f9;
+  border-left: 4px solid #1e293b;
+  border-radius: 8px;
+  font-size: 0.96rem;
+}
+
+.download-links {
+  margin-top: 20px;
+  display: grid;
+  gap: 12px;
+}
+
+.download-links a {
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: #0f172a;
+  color: #ffffff;
+  transition: 0.2s ease;
+}
+
+.download-links a:hover {
+  background: #334155;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.3);
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.82rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Mobile responsiveness */
+@media only screen and (max-width: 600px) {
+  .container {
+    margin: 40px auto;
+    padding: 18px;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+  }
+
+  button {
+    font-size: 0.95rem;
+  }
+
+  .download-links a {
+    font-size: 0.9rem;
+  }
+}
