@@ -11,7 +11,7 @@ const handleRun = async () => {
   form.append("file", file);
 
   try {
-   const res = await axios.post("https:https://transportrequestprocessor.onrender.com/process", form);
+   const res = await axios.post("https://transportrequestprocessor.onrender.com/process", form);
     setOut(res.data);
   } catch (err) {
     alert(err.response?.data?.error || "Include at least one TR in the file");
