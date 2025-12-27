@@ -6,6 +6,11 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+
+@app.route("/")
+def home():
+    return "Server is running OK"
+
 def count_lines_file(fpath: str) -> int:
     with open(fpath, "r", encoding="utf-8") as f:
         return sum(1 for _ in f)
