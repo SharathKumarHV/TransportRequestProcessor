@@ -1,7 +1,7 @@
+import os  # this was missing earlier
 from flask import Flask, request, send_file, jsonify
 from flask_cors import CORS
 import tempfile
-import os
 
 app = Flask(__name__)
 CORS(app)
@@ -61,7 +61,7 @@ def process():
             f3.write(datafile_generator(line) + "\n")
 
     return jsonify({
-        "count": count,
+        "count":count,
         "cofile_path": cofile_path,
         "datafile_path": datafile_path
     })
