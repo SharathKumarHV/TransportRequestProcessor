@@ -34,23 +34,27 @@ def home():
 def process():
     file = request.files["file"]
 
-    upload_tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".txt")
-    file.save(upload_tmp.name)
-    fpath = upload_tmp.name
+    # Save uploaded file to generated folder
+    os.makedirs("generated", exist_ok=True)
+    upload_path = os.path.join("generated", file.filename)
+    file.save(upload_path)
 
-    count = count_lines_file(fpath)
+    count = count_lines_file(upload_path)
 
     if count == 0:
-        return jsonify({
-            "error": "Include at least one Transport Request (TR) in the file"
-        }), 400
+        return jsonify({"error": "Include at least one TR in the file"}), 400
 
-    co_tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".txt")
-    da_tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".txt")
+    # Output file paths (stored on server)
+    cofile_path = os.path.join("generated", "cofiles.txt")
+    datafile_path = os.path.join("generated", "datafiles.txt")
 
-    with open(fpath, "r", encoding="utf-8") as f, open(co_tmp.name, "a+") as f2, open(da_tmp.name, "a+") as f3:
-        for _ in range(count):
-            line = f.readline().strip()
+    # Clear previous content before writing
+    open(cofile_path, "w").close()
+    open(datafile_path, "w").close()
+
+    with open(upload_path, "r") as f, open(cofile_path, "a+") as f2, open(datafile_path, "a+") as f3:
+        for line in f:
+            line = line.strip()
             if not line:
                 continue
             f2.write(cofile_generator(line) + "\n")
@@ -58,17 +62,16 @@ def process():
 
     return jsonify({
         "count": count,
-        "cofile": os.path.basename(co_tmp.name),
-        "datafile": os.path.basename(da_tmp.name),
-        "cofile_path": co_tmp.name,
-        "datafile_path": da_tmp.name
+        "cofile_path": cofile_path,
+        "datafile_path": datafile_path
     })
 
-@app.route("/download", methods=["GET"])
+
+@app.route("/download")
 def download():
     path = request.args.get("path")
     if not path or not os.path.exists(path):
-        return "File not found", 404
+        return jsonify({"error": "File not found on server"}), 404
     return send_file(path, as_attachment=True)
 
 if __name__ == "__main__":
