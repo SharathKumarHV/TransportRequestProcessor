@@ -8,7 +8,7 @@ CORS(app)
 
 
 @app.route("/")
-def home():
+def index():
     return "Server is running OK"
 
 def count_lines_file(fpath: str) -> int:
